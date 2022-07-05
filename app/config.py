@@ -11,7 +11,7 @@ class Config:
 
     def load_environment(self) -> None:
         # Please create a .env file in the root directory of the project
-        path = os.path.dirname(".") + "../.env"
+        path = os.path.abspath('../') + "/.env"
         if os.path.exists(path=path):
             load_dotenv(path)
             while os.getenv("FLAG") is None:
