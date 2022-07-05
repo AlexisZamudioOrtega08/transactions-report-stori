@@ -12,7 +12,7 @@ txns = (
     .build()
     .json()
 )
-emailer = EMailer("alexis130875@gmail.com", config["email"])
+emailer = EMailer(config["email"])
 
 
 @app.route("/statements", methods=["POST"])
@@ -22,8 +22,8 @@ def index():
         return {"msg": "email not provided"}, 400
     rendered = render_template("email.html", data=txns)
     emailer.set_content(rendered)
-    if emailer.send():
-        return {"msg": "success"}, 200
+    if emailer.send(receiver=receiver):
+        return {"msg": "success"}, 201
     else:
         return {"msg": "error"}, 500
 
