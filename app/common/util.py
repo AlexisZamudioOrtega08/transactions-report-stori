@@ -90,19 +90,19 @@ class TxnHelper:
 
 
 class EMailer:
-    def __init__(self, receiver: str, config: object) -> None:
-        self.receiver = receiver
+    def __init__(self, config: object) -> None:
         self.config = config
         self.msg = EmailMessage()
         self.msg["Subject"] = "Your statement is ready!"
         self.msg["From"] = self.config.MAIL_USERNAME
-        self.msg["To"] = self.receiver
 
     def set_content(self, body: str) -> None:
         self.msg.set_content(body, subtype="html")
 
-    def send(self) -> None:
+    def send(self, receiver: str) -> None:
         try:
+            self.receiver = receiver
+            self.msg["To"] = self.receiver
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
                 smtp.login(self.config.MAIL_USERNAME, self.config.MAIL_PASSWORD)
                 smtp.send_message(self.msg)
