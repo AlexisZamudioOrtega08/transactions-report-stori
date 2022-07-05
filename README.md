@@ -16,6 +16,10 @@ The above endpoint requieres a query parameter to be parsed.
 
   - ```host:5000/api/statements?email=example@email.com```
 
+### Dokcer image creation.
+Go to root folder and run the following commands
+  - ```docker image build -t transactions-stori-report .```
+  - ```docker run -p 5000:5000 -d transactions-stori-report```
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
