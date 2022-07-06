@@ -18,8 +18,12 @@ The above endpoint requieres a query parameter to be parsed.
 
 ### In oder to run the app you need to follow the next steps:
   - Create a `.env` file in the root directory of the project, you can refer `.env.example` for this.
-  - Create a docker image:
-    * Go to root folder and run the following commands
+  - In order to complete the next steps you must need to have installed docker in your local machine.
+
+  - Download or create the docker image for the app:
+    * Docker image is available on: ```https://transactions-report-stori-api-assets.sfo3.digitaloceanspaces.com/docker-images/transactions-stori-report-first.tar```
+
+    * In case you have instaññed docker you can build the image by yourself with the following commands:
       * ```docker image build -t transactions-stori-report-first .``` -> This will create an image of the application.
       * ```docker run -p 5001:5001 -d transactions-stori-report-first``` -> This will run the image and expose port 5001 to work locally.
 
