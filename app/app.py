@@ -18,6 +18,7 @@ email_config = config["email"]
 
 @app.route("/statements", methods=["POST"])
 def index():
+<<<<<<< Updated upstream
     emailer = EMailer(email_config)
     receiver = request.args.get("email")
     if receiver is None:
@@ -29,6 +30,24 @@ def index():
     else:
         return {"msg": "email not sent"}, 500
 
+=======
+    try:
+        receiver = request.args.get("email")
+        if receiver is None:
+            return {"msg": "email not provided"}, 400
+        if emailer.is_email(identifier=receiver):
+            rendered = render_template("email.html", data=txns)
+            emailer.set_content(rendered)
+            if emailer.send(receiver=receiver):
+                return {"msg": "success"}, 201
+            else:
+                return {"msg": "error"}, 500
+        else:
+            return {"msg": "invalid email"}, 400
+    except Exception as e:
+        print(e)
+        return error_500(e)
+>>>>>>> Stashed changes
 
 def error_404(error):
     return {"msg": "page not found"}, 404
