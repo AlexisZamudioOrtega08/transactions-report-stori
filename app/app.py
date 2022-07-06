@@ -7,6 +7,7 @@ from common.util import TxnHelper
 
 from flask import Flask, render_template, request
 
+
 def create_app():
     app = Flask(__name__)
     txns = (
@@ -16,7 +17,6 @@ def create_app():
     )
 
     email_config = config["email"]
-
 
     @app.route("/statements", methods=["POST"])
     def index():
@@ -41,14 +41,11 @@ def create_app():
             print(e)
             return {"msg": "email not sent"}, 50
 
-
     def error_404(error):
         return {"msg": "page not found"}, 404
 
-
     def error_405(error):
         return {"msg": "method not allowed"}, 405
-
 
     def error_500(error):
         return {"msg": "internal server error"}, 500

@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 
+
 class Config:
     def __init__(self):
         self.SECRET_KEY = "your_secret_key"
@@ -10,7 +11,7 @@ class Config:
 
     def load_environment(self) -> None:
         # Please create a .env file in the root directory of the project
-        path = os.path.abspath(os.path.dirname('.')) + "/.env"
+        path = os.path.abspath(os.path.dirname(".")) + "/.env"
         if os.path.exists(path=path):
             load_dotenv(path)
             while os.getenv("FLAG") is None:
