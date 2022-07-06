@@ -16,17 +16,18 @@ The above endpoint requieres a query parameter to be parsed.
 
   - ```host:5001/api/statements?email=example@email.com```
 
-### If you want to try the API, you can use the following URL:
-```method: GET host:5000/api/statements```
+### In oder to run the app you need to follow the next steps:
+  - Create a `.env` file in the root directory of the project, you can refer `.env.example` for this.
+  - Create a docker image:
+    * Go to root folder and run the following commands
+      * ```docker image build -t transactions-stori-report-first .``` -> This will create an image of the application.
+      * ```docker run -p 5001:5001 -d transactions-stori-report-first``` -> This will run the image and expose port 5001 to work locally.
 
-### Dokcer image creation.
-### For this to work you need to have installed docker.
-Go to root folder and run the following commands
-  - ```docker image build -t transactions-stori-report-first .```
-  - ```docker run -p 5001:5001 -d transactions-stori-report-first```
-
-### If you want to try realtime application, you can use the following URL:
+### If you want to try the demonstration of the application, you can use the following URL:
 ```method: POST http://first.seitech.org/statements?email=your_mail@example.com```
+
+### Or in case you want to test it locally, you can use the following URL:
+```method: POST http://localhost:5001:statements?email=your_mail@example.com```
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
