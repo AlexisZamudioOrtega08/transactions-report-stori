@@ -1,6 +1,6 @@
-import os, csv
 import smtplib
 import datetime
+import re, os, csv
 from typing_extensions import Self
 from email.message import EmailMessage
 
@@ -96,9 +96,25 @@ class EMailer:
         self.msg["Subject"] = "Your statement is ready!"
         self.msg["From"] = self.config.MAIL_USERNAME
 
+<<<<<<< Updated upstream
     def set_receiver(self, receiver) -> None:
         self.receiver = receiver
         self.msg["To"] = self.receiver
+=======
+    def is_email(self, identifier: str) -> bool:
+        """
+        Check if the given email is valid.
+        :param identifier: To define if is mail.
+        :return: True if the email is valid, False otherwise.
+        """
+        if identifier is None:
+            return False
+        is_email = re.search("^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$", identifier)
+        if is_email:
+            return True
+        else:
+            return False
+>>>>>>> Stashed changes
 
     def set_content(self, body: str) -> None:
         self.msg.set_content(body, subtype="html")
@@ -112,4 +128,8 @@ class EMailer:
                 smtp.send_message(self.msg)
             return True
         except Exception as e:
+<<<<<<< Updated upstream
             return False
+=======
+            raise e
+>>>>>>> Stashed changes
