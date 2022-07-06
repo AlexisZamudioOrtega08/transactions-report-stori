@@ -16,38 +16,30 @@ txns = (
 
 email_config = config["email"]
 
+
 @app.route("/statements", methods=["POST"])
 def index():
-<<<<<<< Updated upstream
-    emailer = EMailer(email_config)
-    receiver = request.args.get("email")
-    if receiver is None:
-        return {"msg": "email not provided"}, 400
-    curr_thread = threading.Thread(target=emailer.send, args=(receiver, render_template("email.html", data=txns)))
-    curr_thread.start()
-    if curr_thread.is_alive():
-        return {"msg": "email sent"}, 200
-    else:
-        return {"msg": "email not sent"}, 500
-
-=======
     try:
+        emailer = EMailer(email_config)
         receiver = request.args.get("email")
         if receiver is None:
             return {"msg": "email not provided"}, 400
         if emailer.is_email(identifier=receiver):
-            rendered = render_template("email.html", data=txns)
-            emailer.set_content(rendered)
-            if emailer.send(receiver=receiver):
-                return {"msg": "success"}, 201
+            curr_thread = threading.Thread(
+                target=emailer.send,
+                args=(receiver, render_template("email.html", data=txns)),
+            )
+            curr_thread.start()
+            if curr_thread.is_alive():
+                return {"msg": "email sent"}, 201
             else:
-                return {"msg": "error"}, 500
+                return {"msg": "email not sent"}, 500
         else:
-            return {"msg": "invalid email"}, 400
+            return {"msg": "email not valid"}, 400
     except Exception as e:
         print(e)
-        return error_500(e)
->>>>>>> Stashed changes
+        return {"msg": "email not sent"}, 50
+
 
 def error_404(error):
     return {"msg": "page not found"}, 404
