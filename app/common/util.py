@@ -96,11 +96,10 @@ class EMailer:
         self.msg["Subject"] = "Your statement is ready!"
         self.msg["From"] = self.config.MAIL_USERNAME
 
-<<<<<<< Updated upstream
     def set_receiver(self, receiver) -> None:
         self.receiver = receiver
         self.msg["To"] = self.receiver
-=======
+
     def is_email(self, identifier: str) -> bool:
         """
         Check if the given email is valid.
@@ -114,7 +113,6 @@ class EMailer:
             return True
         else:
             return False
->>>>>>> Stashed changes
 
     def set_content(self, body: str) -> None:
         self.msg.set_content(body, subtype="html")
@@ -128,8 +126,4 @@ class EMailer:
                 smtp.send_message(self.msg)
             return True
         except Exception as e:
-<<<<<<< Updated upstream
-            return False
-=======
             raise e
->>>>>>> Stashed changes
