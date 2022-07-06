@@ -5,3 +5,5 @@ services:
         container_name: transactions-report-stori-first
         ports:
             - "5001:5001"
+        restart: on-failure
+        
