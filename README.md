@@ -22,7 +22,7 @@ The above endpoint requieres a query parameter to be parsed.
 
     * Once docker is installed you can run the following command:
       ```
-      docker compose up -d
+      docker compose up
       ```
 
 ### If you want to try the demonstration of the application, you can use the following URL:
