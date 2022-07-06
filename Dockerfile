@@ -12,6 +12,4 @@ COPY .env /transactions-report-stori/.env
 
 ENV PYTHONPATH "${PYTHONPATH}:/transactions-report-stori/app"
 
-EXPOSE 5000
-
 CMD ["python", "app/app.py"]
