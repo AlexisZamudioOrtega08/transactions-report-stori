@@ -96,17 +96,20 @@ class EMailer:
         self.msg["Subject"] = "Your statement is ready!"
         self.msg["From"] = self.config.MAIL_USERNAME
 
+    def set_receiver(self, receiver) -> None:
+        self.receiver = receiver
+        self.msg["To"] = self.receiver
+
     def set_content(self, body: str) -> None:
         self.msg.set_content(body, subtype="html")
 
-    def send(self, receiver: str) -> None:
+    def send(self, receiver, rendered) -> None:
         try:
-            self.receiver = receiver
-            self.msg["To"] = self.receiver
+            self.set_receiver(receiver=receiver)
+            self.set_content(body=rendered)
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
                 smtp.login(self.config.MAIL_USERNAME, self.config.MAIL_PASSWORD)
                 smtp.send_message(self.msg)
             return True
         except Exception as e:
-            print(e)
             return False
