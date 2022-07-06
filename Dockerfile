@@ -14,4 +14,4 @@ EXPOSE 5001
 
 ENV PYTHONPATH "${PYTHONPATH}:/transactions-report-stori/app"
 
-CMD ["python", "app/app.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:5001", "wsgi:app"]
