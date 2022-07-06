@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+    flask:
+        build: .
+        container_name: transactions-report-stori-first
+        ports:
+            - "5001:5001"

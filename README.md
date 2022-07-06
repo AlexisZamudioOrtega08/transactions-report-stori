@@ -20,15 +20,13 @@ The above endpoint requieres a query parameter to be parsed.
   - Create a `.env` file in the root directory of the project, you can refer `.env.example` for this.
   - In order to complete the next steps you must need to have installed docker in your local machine.
 
-    * In case you have installed docker you can build the image by yourself with the following commands:
-      * ```docker image build -t transactions-stori-report-first .``` -> This will create an image of the application.
-      * ```docker run -p 5001:5001 -d transactions-stori-report-first``` -> This will run the image and expose port 5001 to work locally.
+    * Once docker is installed you can run the following command:
+      ```
+      docker compose up -d
+      ```
 
 ### If you want to try the demonstration of the application, you can use the following URL:
 ```method: POST http://first.seitech.org/statements?email=your_mail@example.com```
-
-### Or in case you want to test it locally, you can use the following URL:
-```method: POST http://localhost:5001:statements?email=your_mail@example.com```
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
