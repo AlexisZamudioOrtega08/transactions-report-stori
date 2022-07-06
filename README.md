@@ -14,16 +14,19 @@ The above endpoint requieres a query parameter to be parsed.
 
 #### Requests example:
 
-  - ```host:5000/api/statements?email=example@email.com```
+  - ```host:5001/api/statements?email=example@email.com```
 
 ### If you want to try the API, you can use the following URL:
 ```method: GET host:5000/api/statements```
 
 ### Dokcer image creation.
+### For this to work you need to have installed docker.
 Go to root folder and run the following commands
-  - ```docker image build -t transactions-stori-report .```
-  - ```docker run -p 5000:5000 -d transactions-stori-report```
+  - ```docker image build -t transactions-stori-report-first .```
+  - ```docker run -p 5001:5001 -d transactions-stori-report-first```
 
+### If you want to try realtime application, you can use the following URL:
+```method: POST http://first.seitech.org/statements?email=your_mail@example.com```
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
