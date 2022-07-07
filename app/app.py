@@ -19,21 +19,17 @@ def create_app():
     def create_tables():
         db.create_all()
 
-
     api.add_resource(
         Transaction, "{}/transactions".format(api_prefix), methods=["GET", "POST"]
     )
     api.add_resource(Report, "{}/reports".format(api_prefix), methods=["POST"])
     api.add_resource(User, "{}/users".format(api_prefix), methods=["GET", "POST"])
 
-
-    def error_404(error):
-        return {"msg": "page not found"}, 404
-
-
     def error_405(error):
         return {"msg": "method not allowed"}, 405
 
+    def error_500(error):
+        return {"msg": "internal server error"}, 500
 
     def error_500(error):
         print(error)
