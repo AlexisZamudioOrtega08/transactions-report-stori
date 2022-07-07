@@ -10,8 +10,8 @@ COPY ./app /transactions-report-stori/app
  
 COPY .env /transactions-report-stori/.env
 
-EXPOSE 5001
+EXPOSE 5000
 
 ENV PYTHONPATH "${PYTHONPATH}:/transactions-report-stori/app"
 
-CMD ["gunicorn", "-b", "0.0.0.0:5001", "wsgi:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "wsgi:app"]
