@@ -71,6 +71,9 @@ This is an API for simulating a report of transactions.
 
 ##### **Note:**  Email and txns information is retreived with thie id.
 
+#### By consuming the above endpoint you will receive a mail like this:
+![alt text](https://transactions-report-stori-api-assets.sfo3.digitaloceanspaces.com/img/email.png)
+
 
 ### In oder to run the app you need to follow the next steps:
   - Create a `.env` file in the root directory of the project, you can refer `.env.example` for this.
