@@ -13,12 +13,14 @@ def is_email(identifier: str) -> bool:
     :param identifier: To define if is mail.
     :return: True if the email is valid, False otherwise.
     """
-    if identifier is None:
-        return False
-    is_email = re.search("^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$", identifier)
-    if is_email:
-        return True
-    else:
+    try:
+        if identifier is None:
+            return False
+        if validate_email(identifier).email:
+            return True
+        else:
+            return False
+    except Exception as e:
         return False
 
 
