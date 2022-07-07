@@ -5,6 +5,7 @@ import re, os, csv
 from models.txn import Txn as TxnModel
 from typing_extensions import Self
 from email.message import EmailMessage
+from email_validator import validate_email
 
 
 def is_email(identifier: str) -> bool:
