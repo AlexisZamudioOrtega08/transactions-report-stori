@@ -25,14 +25,13 @@ def create_app():
     api.add_resource(Report, "{}/reports".format(api_prefix), methods=["POST"])
     api.add_resource(User, "{}/users".format(api_prefix), methods=["GET", "POST"])
 
+    def error_404(error):
+        return {"msg": "not found"}, 404
+
     def error_405(error):
         return {"msg": "method not allowed"}, 405
 
     def error_500(error):
-        return {"msg": "internal server error"}, 500
-
-    def error_500(error):
-        print(error)
         return {"msg": "internal server error"}, 500
 
     app.config.from_object(config["development"])
