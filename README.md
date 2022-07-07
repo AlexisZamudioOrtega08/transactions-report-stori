@@ -76,10 +76,13 @@ This is an API for simulating a report of transactions.
   - Create a `.env` file in the root directory of the project, you can refer `.env.example` for this.
   - In order to complete the next steps you must need to have installed docker in your local machine.
 
+
     * Once docker is installed you can run the following command:
       ```
-      docker compose up
+      docker-compose up -d
       ```
+
+
 
 ### In case you want to try the API as service, please use the following url as your host:
     https://seitech.org/api/v1

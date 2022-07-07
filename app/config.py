@@ -6,6 +6,7 @@ class Config:
     def __init__(self):
         self.SECRET_KEY = "your_secret_key"
         self.load_environment()
+
         self.DEBUG = True
         self.TESTING = True
         self.DB_CONFIG = {
@@ -26,7 +27,6 @@ class Config:
     def load_environment(self) -> None:
         # Please create a .env file in the root directory of the project
         path = os.path.abspath(os.path.dirname(".")) + "/.env"
-        print(path)
         if os.path.exists(path=path):
             load_dotenv(path)
             while os.getenv("FLAG") is None:
