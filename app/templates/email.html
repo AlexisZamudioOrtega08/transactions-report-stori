@@ -5,7 +5,7 @@
          #img-div{
             text-align: center;
         }
-        #container{
+        .container{
             background-color: #f5f5f5;
             padding: 10px;
             margin-bottom: 10px;
@@ -63,7 +63,7 @@
     <title>Email</title>
 </head>
     <body>
-        <div id="container">
+        <div class="container">
             <div>
                 <div id="img-div">
                     <a href="https://www.storicard.com/">
@@ -72,10 +72,11 @@
                 </div>
             </div>
             <div id="title">
+                {% if data %}
+                <h2>Hi <b>{{data.first_name}} {{data.last_name}}</b>,</h3>
                 <h3>Your paperless report is ready!</h3>
             </div>
             <div id="body">
-                {% if data %}
                 <h4>Report date: {{data.date[1][1]}} {{data.date[0][1]}}, {{data.date[2][1]}}</h4>
                 <table id="customers">
                       <tr>
@@ -83,30 +84,30 @@
                         <th>Amount</th>
                       </tr>
                       <tr>
-                        <td>Average debit amount</td>
+                        <td> <b>Average debit amount </b> </td>
                         <td>${{ data.adb }}</td>
                       </tr>
                       <tr>
-                        <td>Average credit amount</td>
+                        <td> <b>Average credit amount</b></td>
                         <td>${{ data.aca }}</td>
                       </tr>
                       {% for month in data.txns %}
                         <tr>
-                            <td>Transactions in {{month[0]}}</td>
+                            <td><b>Transactions in {{month[0]}} </b></td>
                             <td>{{month[1]}}</td>
                         </tr>
                       {% endfor %}
-                    {% endif %}
                 </table>
                 
                 <p id="tb">
-                    <b>Total balance:</b> $39.74
+                    <b>Total balance:</b> ${{ data.tb }}
                 </p>
+                {% endif %}
             </div>
         </div>
     </body>
     <footer>
-        <div id="container">
+        <div class="container">
             <div id="footer">
                 <p>
                     <b>Please do not reply this mail!</b>
