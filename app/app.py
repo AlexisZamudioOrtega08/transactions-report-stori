@@ -1,62 +1,49 @@
-import os
-import threading
+from db import db
 
 from config import config
-from common.util import EMailer
-from common.util import TxnHelper
 
-from flask import Flask, render_template, request
+from flask import Flask
+from flask_restful import Api
 
-app = Flask(__name__)
-txns = (
-    TxnHelper(path=os.path.dirname(os.path.abspath(__file__)) + "/data/txns.csv")
-    .build()
-    .json()
-)
+from resources.user import User
+from resources.report import Report
+from resources.transaction import Transaction
 
-email_config = config["email"]
-
-
-@app.route("/statements", methods=["POST"])
-def index():
-    try:
-        emailer = EMailer(email_config)
-        receiver = request.args.get("email")
-        if receiver is None:
-            return {"msg": "email not provided"}, 400
-        if emailer.is_email(identifier=receiver):
-            curr_thread = threading.Thread(
-                target=emailer.send,
-                args=(receiver, render_template("email.html", data=txns)),
-            )
-            curr_thread.start()
-            if curr_thread.is_alive():
-                return {"msg": "email sent"}, 201
-            else:
-                return {"msg": "email not sent"}, 500
-        else:
-            return {"msg": "email not valid"}, 400
-    except Exception as e:
-        print(e)
-        return {"msg": "email not sent"}, 50
+def create_app():
+    app = Flask(__name__, template_folder="templates")
+    api = Api(app)
+    api_prefix = config["development"].API_PREFIX
 
 
-def error_404(error):
-    return {"msg": "page not found"}, 404
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
 
 
-def error_405(error):
-    return {"msg": "method not allowed"}, 405
+    api.add_resource(
+        Transaction, "{}/transactions".format(api_prefix), methods=["GET", "POST"]
+    )
+    api.add_resource(Report, "{}/reports".format(api_prefix), methods=["POST"])
+    api.add_resource(User, "{}/users".format(api_prefix), methods=["GET", "POST"])
 
 
-def error_500(error):
-    return {"msg": "internal server error"}, 500
+    def error_404(error):
+        return {"msg": "page not found"}, 404
 
 
-if __name__ == "__main__":
+    def error_405(error):
+        return {"msg": "method not allowed"}, 405
+
+
+    def error_500(error):
+        print(error)
+        return {"msg": "internal server error"}, 500
+
     app.config.from_object(config["development"])
     app.secret_key = config["development"].SECRET_KEY
+    db.init_app(app)
     app.register_error_handler(404, error_404)
     app.register_error_handler(405, error_405)
     app.register_error_handler(500, error_500)
-    app.run(host="0.0.0.0", port=5001)
+    
+    return app

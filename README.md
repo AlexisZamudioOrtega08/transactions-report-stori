@@ -1,33 +1,92 @@
 # Welcome to transactions-report-stori
 
-This is an API for sending a report of transactions to a mail address.
+This is an API for simulating a report of transactions.
 
-### The API contains one endpoint:
-```method: POST host:5000/api/statements```
+### The API contains the following group of endpoints:
+  - transactions
+  - users
+  - reports
 
-The above endpoint requieres a query parameter to be parsed.
+### In transactions group there are two endpoints availables:
+  ```method: POST host/api/v1/transactions```
 
-| Query Parameters| Type        | Description                                     |
-| :-------------  | :---------- | :---------------------------------------------- |
-| `email`         | `str`       | **Required**. Email of user to receive the mail |
+   The above endpoint requires the following parameters.
 
+  | Body  Parameters| Type        | Description                                         |
+  | :-------------  | :---------- | :-------------------------------------------------- |
+  | `user_id`       | `int`       | **Required**. Id of the user that made the txn.     |
+  | `txn`           | `bool`      | **Required**. Type of txn (1 -> Credit, 0 -> Debit).|
+  | `amount`        | `float`     | **Required**. Amount of txn.                        |
 
-#### Requests example:
+  **Body example**
+  
+    {
+        "user_id": 3,
+        "txn": 0,
+        "amount": 150.78
+    }
 
-  - ```host:5001/api/statements?email=example@email.com```
+  ```method: GET host/api/v1/transactions```    
+
+| Query Parameters| Type        | Description                                         |
+| :-------------  | :---------- | :-------------------------------------------------- |
+| `user_id`       | `int`       | **Not Required**. Id of user, to obtain txns.       |
+
+##### **Note:** If user_id is not provided all txns will be retreived
+
+### In users group there are two endpoints availables:
+
+```method: POST host/api/v1/users```
+
+   The above endpoint requires the following parameters.
+
+  | Body  Parameters| Type        | Description                          |
+  | :-------------  | :---------- | :----------------------------------- |
+  | `email`         | `str`       | **Required**. Email of the user.     |
+  | `first_name`    | `str`       | **Required**. First name os user.    |
+  | `last_name`     | `str`       | **Required**. Last name of user.     |
+
+**Body example**
+ 
+    {
+      "email": "your_mail@example.com",
+      "first_name": "your_name",
+      "last_name": "your_last_name"
+    }
+
+```method: GET host/api/v1/users```    
+
+| Query Parameters| Type        | Description                     |
+| :-------------  | :---------- | :------------------------------ |
+| `id`            | `int`       | **Not Required**. Id of user.   |
+
+##### **Note:** If id is not provided all users will be retreived.
+
+### In reports group there is only a single endpoint available:
+```method: POST host/api/v1/reports```
+
+| Query Parameters| Type        | Description                     |
+| :-------------  | :---------- | :------------------------------ |
+| `user_id`       | `int`       | **Required**. Id of user.       |
+
+##### **Note:**  Email and txns information is retreived with thie id.
+
 
 ### In oder to run the app you need to follow the next steps:
   - Create a `.env` file in the root directory of the project, you can refer `.env.example` for this.
-  - Create a docker image:
-    * Go to root folder and run the following commands
-      * ```docker image build -t transactions-stori-report-first .``` -> This will create an image of the application.
-      * ```docker run -p 5001:5001 -d transactions-stori-report-first``` -> This will run the image and expose port 5001 to work locally.
+  - In order to complete the next steps you must need to have installed docker in your local machine.
 
-### If you want to try the demonstration of the application, you can use the following URL:
-```method: POST http://first.seitech.org/statements?email=your_mail@example.com```
+    * Once docker is installed you can run the following command:
+      ```
+      docker compose up
+      ```
 
-### Or in case you want to test it locally, you can use the following URL:
-```method: POST http://localhost:5001:statements?email=your_mail@example.com```
+### In case you want to try the API as service, please use the following url as your host:
+    https://seitech.org/api/v1
+    
+    e.g
+    
+      - METHOD GET https://seitech.org/api/v1/users
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
