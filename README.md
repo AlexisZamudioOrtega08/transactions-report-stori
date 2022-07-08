@@ -88,11 +88,11 @@ This is an API for simulating a report of transactions.
 
 
 ### In case you want to try the API as service, please use the following url as your host:
-    https://seitech.org/api/v1
+    http://test.seitech.org/api/v1
     
     e.g
     
-      - METHOD GET https://seitech.org/api/v1/users
+      - METHOD GET http://test.seitech.org/api/v1/users
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
