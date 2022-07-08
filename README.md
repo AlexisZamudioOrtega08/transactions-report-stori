@@ -92,7 +92,7 @@ This is an API for simulating a report of transactions.
     
     e.g
     
-      - METHOD GET https://seitech.org/api/v1/users
+      - METHOD GET http://test.seitech.org/api/v1/users
 
 ## Author
 - [X] [@alexiszamudio](https://github.com/AlexisZamudioOrtega08)
